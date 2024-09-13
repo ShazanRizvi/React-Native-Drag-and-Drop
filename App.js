@@ -8,6 +8,7 @@ const App = () => {
   const [droppedItems, setDroppedItems] = useState([]);  // Store dropped items and their positions
   const [lines, setLines] = useState([50, 150, 250, 350, 450]);  // Define y-coordinates for the lines
   const dropZoneLayoutRef = useRef(null);  // Use ref for DropZone layout
+  
 
   // Function to handle dropping the item
   const handleDrop = (item, position) => {
@@ -19,11 +20,12 @@ const App = () => {
     }
 
     // Adjust position relative to DropZone
-    const adjustedX = position.x - dropZoneLayout.x || 0;
+    const adjustedX = position.x - dropZoneLayout.x|| 0;
     const adjustedY = position.y - dropZoneLayout.y || 0;
 
     console.log('Adjusted X:', adjustedX);
     console.log('Adjusted Y:', adjustedY);
+    
 
     // Check if the drop is near any line (within 20px proximity)
     const closestLine = lines.find((lineY) => Math.abs(lineY - adjustedY) < 50);  // Increase the proximity check to 50px

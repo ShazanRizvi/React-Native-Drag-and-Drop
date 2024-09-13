@@ -17,7 +17,7 @@ const DropZone = ({ droppedItems, lines }) => {
             styles.droppedItem,
             {
               left: droppedItem.position.x - 50,  // Adjust the x-coordinate
-              top: droppedItem.position.y,        // Snap to the closest line's y-coordinate
+              top: droppedItem.position.y-25,        // Snap to the closest line's y-coordinate
             },
           ]}
         >
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   droppedItem: {
     position: 'absolute',
-    padding: 15,
+    padding: 16,
     borderRadius: 50,
     backgroundColor: 'lightblue',
     justifyContent: 'center',
