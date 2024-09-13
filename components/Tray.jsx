@@ -1,36 +1,29 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { DraxProvider, DraxView, DraxList } from 'react-native-drax';
+import { View, StyleSheet } from 'react-native';
+import DraggableItem from './DraggableBox'; // Reusing the DraggableItem component from earlier
 
-const ComponentTray = () => {
+const ComponentTray = ({ onDrop }) => {
   const components = ['Component1', 'Component2', 'Component3'];
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+    <View style={styles.tray}>
       {components.map((component, index) => (
-        <DraxView
+        <DraggableItem
           key={index}
-          style={styles.draggable}
-          payload={component}
-          draggable={true}
-          longPressDelay={150} // for a smoother drag experience
-        >
-          <Text>{component}</Text>
-        </DraxView>
+          label={component}
+          onDrop={onDrop} // Pass the drop handler to each draggable component
+        />
       ))}
     </View>
   );
 };
 
-const styles = {
-  draggable: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'lightgray',
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+const styles = StyleSheet.create({
+  tray: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 20,
   },
-};
+});
 
 export default ComponentTray;

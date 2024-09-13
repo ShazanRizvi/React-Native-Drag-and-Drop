@@ -1,50 +1,54 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { DraxView } from 'react-native-drax';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-const DropZone = () => {
-  const [droppedItems, setDroppedItems] = useState([]);
-  const handleDrop = (event) => {
-    const newPayload = event.dragged.payload;
-    // Add the newly dropped item to the state
-    setDroppedItems((prevItems) => [...prevItems, newPayload]);
-    console.log('Dropped:', newPayload);
-  };
-
+const DropZone = ({ droppedItems, lines }) => {
   return (
-    <DraxView
-      style={styles.dropZone}
-      onReceiveDragDrop={handleDrop}
-    >
-      {droppedItems.length === 0 ? (
-        <Text>Drop Items Here</Text>
-      ) : (
-        droppedItems.map((item, index) => (
-          <View key={index} style={styles.droppedItem}>
-            <Text>{item}</Text>
-          </View>
-        ))
-      )}
-    </DraxView>
+    <View style={styles.dropZone}>
+      {/* Draw the lines */}
+      {lines.map((lineY, index) => (
+        <View key={index} style={[styles.line, { top: lineY }]} />
+      ))}
+
+      {/* Render dropped items on the closest line */}
+      {droppedItems.map((droppedItem, index) => (
+        <View
+          key={index}
+          style={[
+            styles.droppedItem,
+            {
+              left: droppedItem.position.x - 50,  // Adjust the x-coordinate
+              top: droppedItem.position.y,        // Snap to the closest line's y-coordinate
+            },
+          ]}
+        >
+          <Text>{droppedItem.item}</Text>
+        </View>
+      ))}
+    </View>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   dropZone: {
-    width: 300,
-    height: 700,
-    backgroundColor: 'lightgreen',
+    flex: 1,
+    position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  line: {
+    position: 'absolute',
+    width: '100%',
+    height: 1,
+    backgroundColor: 'grey', // Line color
   },
   droppedItem: {
-    width: 100,
-    height: 50,
-    backgroundColor: 'lightgray',
-    margin: 10,
+    position: 'absolute',
+    padding: 15,
+    borderRadius: 50,
+    backgroundColor: 'lightblue',
     justifyContent: 'center',
     alignItems: 'center',
   },
-};
+});
 
 export default DropZone;
