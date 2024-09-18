@@ -24,9 +24,9 @@ const DraggableItem = ({ label, onDrop }) => {
         const success = onDrop(label, { x: finalX, y: finalY });
 
         if (success) {
-          // If drop is successful, snap the component to the nearest line
-          translateX.value = withSpring(0);  // Reset X to original position
-          translateY.value = withSpring(0);  // Reset Y to snapped line position
+          // Snap the component to the closest line
+          translateX.value = withSpring(0);  // Reset X to original position (centered)
+          translateY.value = withSpring(0);  // Reset Y based on snapped line position
         } else {
           // If drop is unsuccessful (outside of DropZone), return to previous position
           translateX.value = withSpring(0);

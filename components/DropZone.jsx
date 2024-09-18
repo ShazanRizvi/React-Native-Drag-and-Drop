@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const DropZone = ({ droppedItems, lines }) => {
+  console.log("Current Lines in DropZone:", lines);
   return (
     <View style={styles.dropZone}>
       {/* Draw the lines */}
@@ -16,8 +17,8 @@ const DropZone = ({ droppedItems, lines }) => {
           style={[
             styles.droppedItem,
             {
-              left: droppedItem.position.x - 50,  // Adjust the x-coordinate
-              top: droppedItem.position.y-25,        // Snap to the closest line's y-coordinate
+              left: droppedItem.position.x - 50,  
+              top: droppedItem.position.y-25,        
             },
           ]}
         >
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor:'lightgrey'
   },
   line: {
     position: 'absolute',
